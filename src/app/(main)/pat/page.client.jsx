@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useCallback, useEffect } from "react";
-import { client } from "../../appwrite";
+import { client } from "../../../lib/appwrite";
 import { createPatData } from "./page.api";
 
 export default function PatClient() {

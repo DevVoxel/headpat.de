@@ -7,7 +7,7 @@ import {
   editUserEmail,
   editUserPassword,
   handleNsfwChange,
-} from "../../../utils/actions/user-actions";
+} from "utils/actions/user-actions";
 
 export default function AccountPage({ userDataSelf, userSelf, userId }) {
   const [userData, setUserData] = useState(userDataSelf || []);

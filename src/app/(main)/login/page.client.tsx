@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ErrorMessage } from "components/alerts";
-import { account, functions } from "../../appwrite";
-import { ExecutionMethod, ID } from "appwrite";
+import { account, functions } from "@/lib/appwrite";
+import { ID, OAuthProvider } from "appwrite";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -48,7 +48,7 @@ export default function Login() {
     }
   };
 
-  const handleOAuth2Login = async (provider) => {
+  const handleOAuth2Login = async (provider: OAuthProvider) => {
     account.createOAuth2Session(
       provider,
       `${process.env.NEXT_PUBLIC_DOMAIN}/account`,
@@ -61,14 +61,7 @@ export default function Login() {
   }, []);
 
   const handleFunction = async () => {
-    const response = await functions.createExecution(
-      "65e2126d9e431eb3c473",
-      "",
-      false,
-      "/getUserSelf",
-      ExecutionMethod.GET,
-    );
-    return response.responseBody;
+    //return await account.get();
   };
 
   return (
@@ -179,7 +172,7 @@ export default function Login() {
                 <div>
                   <button
                     type="submit"
-                    onClick={handleEmailLogin}
+                    //onClick={handleEmailLogin}
                     className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     {!isRegistering ? "Sign in" : "Register"}
@@ -214,7 +207,7 @@ export default function Login() {
 
               <div className="mt-6 grid grid-cols-2 gap-4">
                 <button
-                  onClick={() => handleOAuth2Login("discord")}
+                  //onClick={() => handleOAuth2Login("discord")}
                   className="flex w-full items-center justify-center gap-3 rounded-md border border-black/20 bg-[#5865F2] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1D9BF0] dark:border-white/20"
                 >
                   <svg
@@ -231,7 +224,7 @@ export default function Login() {
                 </button>
 
                 <button
-                  onClick={() => handleOAuth2Login("github")}
+                  //onClick={() => handleOAuth2Login("github")}
                   className="flex w-full items-center justify-center gap-3 rounded-md border border-black/20 bg-[#24292F] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] dark:border-white/20"
                 >
                   <svg
@@ -252,7 +245,7 @@ export default function Login() {
                 </button>
 
                 <button
-                  onClick={() => handleOAuth2Login("apple")}
+                  //onClick={() => handleOAuth2Login("apple")}
                   className="flex w-full items-center justify-center gap-3 rounded-md border border-black/20 bg-[#000000] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] dark:border-white/20"
                 >
                   <svg
@@ -267,7 +260,7 @@ export default function Login() {
                 </button>
 
                 <button
-                  onClick={() => handleOAuth2Login("google")}
+                  //onClick={() => handleOAuth2Login("google")}
                   className="flex w-full items-center justify-center gap-3 rounded-md border border-black/20 bg-[#131314] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] dark:border-white/20"
                 >
                   <svg
@@ -301,7 +294,7 @@ export default function Login() {
                 </button>
 
                 <button
-                  onClick={() => handleOAuth2Login("spotify")}
+                  //onClick={() => handleOAuth2Login("spotify")}
                   className="flex w-full items-center justify-center gap-3 rounded-md border border-black/20 bg-[#1DB954] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] dark:border-white/20"
                 >
                   <svg

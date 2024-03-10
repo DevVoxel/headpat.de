@@ -11,10 +11,10 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import Image from "next/image";
 
-export default function FetchGallery() {
+export default function FetchGallery({ userDataSelf }) {
   const [gallery, setGallery] = useState([]);
   const [userId, setUserId] = useState(null);
-  const [enableNsfw, setEnableNsfw] = useState(false);
+  const [enableNsfw] = useState(userDataSelf.enableNsfw || false);
   const [userData, setUserData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   //const [totalPages, setTotalPages] = useState(1)
@@ -46,25 +46,6 @@ export default function FetchGallery() {
         console.error(error);
       });
   }, [username]);
-
-  useEffect(() => {
-    if (!userId) return; // Wait for userId to be available
-
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch(`/api/user/getUserDataSelf`, {
-          method: "GET",
-        });
-
-        const data = await response.json();
-        setEnableNsfw(data[0].enablensfw);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUserData();
-  }, [userId]);
 
   useEffect(() => {
     if (!userId) return; // Wait for userId to be available

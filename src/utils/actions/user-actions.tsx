@@ -1,6 +1,5 @@
 "use server";
 import { cookies, headers } from "next/headers";
-import { UserDataType } from "utils/types";
 
 export async function getUsers() {
   const response = await fetch(
@@ -54,7 +53,7 @@ export async function getUserData(query = "") {
   const cookieHeader = headersList.get("cookie");
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/databases/hp_db/collections/65564fa28d1942747a72/documents?${query}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/v1/databases/hp_db/collections/userdata/documents?${query}`,
     {
       method: "GET",
       headers: {
@@ -100,9 +99,14 @@ export async function getUserDataSelf() {
   return await getUserData.json();
 }
 
-export async function getUserDataById(userId: string) {
+export async function getUserDataById(isSelf: boolean, userId: string = null) {
   const headersList = headers();
   const cookieHeader = headersList.get("cookie");
+
+  if (isSelf) {
+    const accountData = await getAccount();
+    userId = accountData.$id;
+  }
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/v1/databases/hp_db/collections/655ad3d280feee3296b5/documents/${userId}`,
